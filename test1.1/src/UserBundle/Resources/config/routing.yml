@@ -1,0 +1,24 @@
+user_homepage:
+    path:     /front
+    defaults: { _controller: UserBundle:Default:index }
+evenement_listmy:
+    path:     /listmyevent
+    defaults: { _controller: UserBundle:Evenement:listmy }
+evenement_update:
+    path:     /updateA/{id}
+    defaults: { _controller: UserBundle:Evenement:update }
+evenement_delete:
+    path:     /deleteA/{id}
+    defaults: { _controller: UserBundle:Evenement:delete }
+evenement_ajout:
+    path:     /ajoutevent
+    defaults: { _controller: UserBundle:Evenement:ajout }
+evenement_list:
+    path:     /listevenment
+    defaults: { _controller: UserBundle:Evenement:list }
+evenement_access:
+    path:     /evenementAccess/{id}
+    defaults: { _controller: UserBundle:Evenement:evenementAccess }
+evenement_about:
+    path:     /about/{id}
+    defaults: { _controller: UserBundle:Evenement:aboutEvenement }

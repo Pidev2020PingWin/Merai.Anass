@@ -1,0 +1,12 @@
+admin_homepage:
+    path:     /back
+    defaults: { _controller: AdminBundle:Default:back }
+demande_list:
+    path:     /demandelist
+    defaults: { _controller: AdminBundle:Evenement:list }
+demande_accept:
+    path:     /demande_accept/{id}
+    defaults: { _controller: AdminBundle:Evenement:accepter }
+demande_refus:
+    path:     /demande_refus/{id}
+    defaults: { _controller: AdminBundle:Evenement:refuser }

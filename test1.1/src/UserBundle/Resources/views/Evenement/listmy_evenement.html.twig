@@ -1,0 +1,138 @@
+{% extends "@User/Default/index.html.twig" %}
+{% block slide %}
+    <div class="inner_page-banner one-img">
+    </div>
+    <div class="using-border py-3">
+        <div class="inner_breadcrumb  ml-4">
+            <ul class="short_ls">
+                <li>
+                    <a href="{{ path('user_homepage') }}">Index</a>
+                    <span>/</span>
+                </li>
+                <li>Mes propres evénements</li>
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}
+{% block body %}
+    {#{{ form_start(form) }}#}
+    <section class="checkout py-lg-4 py-md-3 py-sm-3 py-3">
+        <div class="container py-lg-5 py-md-4 py-sm-4 py-3">
+            <div class="shop_inner_inf">
+                <div class="privacy about">
+                    <div class="checkout-right-basket">
+                        <a href="{{ path("evenement_ajout")}}">Ajouter un nouveau evénement </a>
+                    </div>
+                    <h3>Mes<span>Evénements :</span></h3>
+                    <h8>Il y a: <span>{{ nb }} événement(s)</span></h8>
+
+                    <div class="checkout-right">
+                        {% if evenments|length == 0 %}
+                            <tr>
+                                <h4> <td colspan="7"><center>Vous n'avez aucun evénement !</center></td></h4>
+                            </tr>
+                        {% endif %}
+
+                        {% if evenments|length != 0 %}
+                        <table class="timetable_sub">
+                            <thead>
+
+                            <tr>
+                                <th>Nom</th>
+                                <th>Date</th>
+                                <th>Heure</th>
+                                <th>adresse</th>
+                                <th>Description</th>
+                                <th>Image</th>
+
+                                <th>Supprimer</th>
+                                <th>Modifier</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+
+
+    {% for evenment in evenments %}
+
+
+
+        <tr class="rem1">
+            <td class="invert">{{ evenment.nomEvent }}</td>
+            <td class="invert">{{ evenment.date|date("m/d/y") }}</td>
+            <td class="invert">{{ evenment.heure }}</td>
+            <td class="invert">{{ evenment.adresse }}</td>
+            <td class="invert">{{ evenment.description }}</td>
+            <td><img src="{{ asset('images/')  }}{{ evenment.nomImage }} " style="width: 150px;height: 150px" alt=" " class="img-thumbnail img-fluid" alt=""></td>
+
+            <td class="invert">
+                <div class="rem">
+                    <a href={{ path("evenement_delete",{'id':evenment.idEvent})}} >
+                        <div class="close1"> </div>
+                    </a>
+                </div>
+            </td>
+            <td class="invert">
+                <a href="{{ path("evenement_update",{'id':evenment.idEvent})}}" >
+                    <div class="quantity">
+                        <div class="quantity-select">
+                            <div class="entry value-plus active">&nbsp;</div>
+                        </div>
+                    </div>
+                </a>
+            </td>
+
+        </tr>
+        {% endfor %}
+
+                            </tbody>
+                        </table>
+                        {% endif %}
+                    </div>
+                    <div class="checkout-left">
+
+
+                        <div class="clearfix"> </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- //top products -->
+        </div>
+    </section>
+
+
+
+
+    {#{{ form_end(form) }}#}
+        </div>
+    </div>
+
+{% endblock %}
+{% block login %}
+    <div>
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+            <a href="{{ path('fos_user_security_logout') }}">
+                {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+            </a>
+
+        {% endif %}
+    </div>
+
+    {% if app.request.hasPreviousSession %}
+        {% for type, messages in app.session.flashbag.all() %}
+            {% for message in messages %}
+                <div class="flash-{{ type }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+
+    <div>
+        {% block fos_user_content %}
+        {% endblock fos_user_content %}
+    </div>
+{% endblock %}
