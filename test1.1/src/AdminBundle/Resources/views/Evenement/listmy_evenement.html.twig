@@ -1,0 +1,89 @@
+{% extends "@Admin/Default/back.html.twig" %}
+
+{% block body %}
+    <section class="checkout py-lg-4 py-md-3 py-sm-3 py-3">
+        <div class="container py-lg-5 py-md-4 py-sm-4 py-3">
+            <div class="shop_inner_inf">
+                <div class="privacy about">
+                    <div class="checkout-right-basket">
+                        <a href="#">Ajouter un nouveau evénement </a>
+                    </div>
+
+
+                    <div class="checkout-right">
+                        {% if evenments|length == 0 %}
+                            <tr>
+                                <h4> <td colspan="7"><center>Vous n'avez aucun evénement !</center></td></h4>
+                            </tr>
+                        {% endif %}
+
+                        {% if evenments|length != 0 %}
+                            <table class="timetable_sub">
+                                <thead>
+
+                                <tr>
+                                    <th>Nom</th>
+                                    <th>Date</th>
+                                    <th>Heure</th>
+                                    <th>adresse</th>
+                                    <th>Description</th>
+                                    <th>Image</th>
+
+                                    <th>Supprimer</th>
+                                    <th>Modifier</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+
+
+                                {% for evenment in evenments %}
+
+
+
+                                    <tr class="rem1">
+                                        <td class="invert">{{ evenment.nomEvent }}</td>
+                                        <td class="invert">{{ evenment.date|date("m/d/y") }}</td>
+                                        <td class="invert">{{ evenment.heure }}</td>
+                                        <td class="invert">{{ evenment.adresse }}</td>
+                                        <td class="invert">{{ evenment.description }}</td>
+                                        <td><img src="{{ asset('images/')  }}{{ evenment.nomImage }} " style="width: 150px;height: 150px" alt=" " class="img-thumbnail img-fluid" alt=""></td>
+
+                                        <td class="invert">
+                                            <div class="rem">
+                                                <a href=# >
+                                                    <div class="close1"> </div>
+                                                </a>
+                                            </div>
+                                        </td>
+                                        <td class="invert">
+                                            <a href="#" >
+                                                <div class="quantity">
+                                                    <div class="quantity-select">
+                                                        <div class="entry value-plus active">&nbsp;</div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </td>
+
+                                    </tr>
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+                        {% endif %}
+                    </div>
+                    <div class="checkout-left">
+
+
+                        <div class="clearfix"> </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- //top products -->
+        </div>
+    </section>
+
+    {{ knp_pagination_render(events,'@User/Paginator/pagination.html.twig') }}
+{% endblock %}

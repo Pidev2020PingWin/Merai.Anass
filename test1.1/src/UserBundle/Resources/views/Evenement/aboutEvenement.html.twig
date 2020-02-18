@@ -9,17 +9,17 @@
                     <a href="{{ path('user_homepage') }}">Index</a>
                     <span>/</span>
                 </li>
-                <li>Bienvenu a l'événement {{ asso.nomEvent }}</li>
+                <li>Bienvenu a l'événement {{ event.nomEvent }}</li>
             </ul>
         </div>
     </div>
 
 {% endblock %}
 {% block body %}
-{#
+
     <style>
         form .stars {
-            background: url("/../test1.1/web/images/stars.png") repeat-x 0 0;
+            background: url("/../test1.1/web/stars.png") repeat-x 0 0;
             width: 150px;
             margin: 0 auto;
         }
@@ -82,7 +82,7 @@
             top: 0;
             left: 0;
             height: 30px;
-            background: url("/../SymfonyPi/web/images/stars.png") repeat-x 0 -60px;
+            background: url("/../test1.1/web/stars.png") repeat-x 0 -60px;
             -webkit-transition: -webkit-width 0.5s;
             -moz-transition: -moz-width 0.5s;
             -ms-transition: -ms-width 0.5s;
@@ -90,7 +90,7 @@
             transition: width 0.5s;
         }
     </style>
-#}
+
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script type="text/javascript">
         $('input:checkbox').change(function () {
@@ -104,8 +104,8 @@
         <div class="container py-lg-5 py-md-4 py-sm-4 py-3">
 
             <div class="about-innergrid-agile text-center">
-                <h4>Bienvenue dans {{ asso.nomEvent }} </h4>
-                <img src=" {{ asset('images/') }}{{ asso.nomImage }}" class="img-thumbnail img-fluid" alt="">
+                <h4>Bienvenue dans {{ event.nomEvent }} </h4>
+                <img src=" {{ asset('images/') }}{{ event.nomImage }}" class="img-thumbnail img-fluid" alt="">
                 <ul class="stars">
                 <li>
 
@@ -113,7 +113,7 @@
 
                 </li>
                 </ul>
-                    <p class="mb-3">Bienvenue dans la page de l'événement {{ asso.nomEvent }} créer par le membre {{ asso.chefId.nom }} en {{ asso.date|date("m/d/y") }}  localiser dans {{ asso.adresse }}  .</p>
+                    <p class="mb-3">Bienvenue dans la page de l'événement {{ event.nomEvent }} créer par le membre {{ event.chefId.nom }} en {{ event.date|date("m/d/y") }}  localiser dans {{ event.adresse }}  .</p>
 
                 </div>
           {#  <div align="center">
@@ -122,10 +122,10 @@
             </div>
         <div align="center">
             <ul>
-            <li >Voter pour {{ asso.nomEvent }} :</li>
+            <li >Voter pour {{ event.nomEvent }} :</li>
             </ul>
         </div>
-        {#    {{ form_start(form) }}
+           {{ form_start(form) }}
                <form id="ratingsForm" name="rating">
                        <div class="stars">
                            <input type="radio" name="star" class="star-1" id="star-1" value="1" />
@@ -140,7 +140,7 @@
                            <label class="star-5" for="star-5">5</label>
                            <span></span>
                        </div>
-   #}
+
 
                     <div align="center">
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal-two">voter</button>
@@ -162,7 +162,7 @@
                     <div class="col-lg-6 col-md-6 address-w3l-right text-center">
                         <div class="address-gried ">
                             <span class="far fa-map"></span>
-                            <p>{{ asso.adresse }}<br>Tunisie
+                            <p>{{ event.adresse }}<br>Tunisie
                             </p><p>
                             </p></div>
                         <div class="address-gried mt-3">
@@ -171,7 +171,7 @@
                         </div>
                         <div class=" address-gried mt-3">
                             <span class="far fa-envelope"></span>
-                            <p><a href="mailto:info@example.com">{{ asso.nomEvent }}@gmail.com</a>
+                            <p><a href="mailto:info@example.com">{{ event.nomEvent }}@gmail.com</a>
                                 <br><a href="mailto:info@example.com">Pingwin@gmail.com</a>
                             </p>
                         </div>
@@ -184,15 +184,15 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModal-twoLabel">Parlez-nous de votre expérience dans {{ asso.nomEvent }}</h5>
+                    <h5 class="modal-title" id="exampleModal-twoLabel">Parlez-nous de votre expérience dans {{ event.nomEvent }}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     {#<textarea placeholder="pourquoi cette note" class="form-control" rows="3" name="description"></textarea>#}
-                  {#                    {{ form_widget(form.description,{'attr':{'placeholder':"votre texte ..." }}) }}
-#}
+                    {{ form_widget(form.description,{'attr':{'placeholder':"votre texte ..." }}) }}
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">fermer</button>

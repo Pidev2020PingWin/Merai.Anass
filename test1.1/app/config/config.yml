@@ -60,6 +60,10 @@ doctrine:
         auto_generate_proxy_classes: '%kernel.debug%'
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
+        dql:
+            numeric_functions:
+                round: AppBundle\DoctrineFunctions\Round
+
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -99,3 +103,9 @@ knp_paginator:
         sortable: '@KnpPaginator/Pagination/twitter_bootstrap_v3_pagination.html.twig' # sort link template
         filtration: '@KnpPaginator/Pagination/filtration.html.twig'  # filters template
 
+# NotificationsBundle configuration
+notifications:
+    app_id:     "949411"
+    app_key:    "945c4eb2748aa5d41f0e"
+    app_secret: "5ffe12dd0777f47157b1"
+    cluster:    "eu"

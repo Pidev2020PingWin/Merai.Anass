@@ -10,3 +10,6 @@ demande_accept:
 demande_refus:
     path:     /demande_refus/{id}
     defaults: { _controller: AdminBundle:Evenement:refuser }
+rating_list:
+    path:     /ratinglist
+    defaults: { _controller: AdminBundle:Evenement:listR }

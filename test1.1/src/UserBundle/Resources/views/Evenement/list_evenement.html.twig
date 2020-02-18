@@ -22,20 +22,18 @@
             <div class="row">
                 <div class="side-bar col-lg-3">
                     <div class="search-hotel">
-                        <h3 class="agileits-sear-head">Search Here..</h3>
+                        <h3 class="agileits-sear-head">Recherche</h3>
 
-                        <input type="search" placeholder="Association name..." id="search">
+                        <input type="search" placeholder="Nom de l'événement ..." id="search">
+
                     </div>
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="#">Search results<span class="fa arrow"></span></a>
+                            <a href="{{ path('evenement_list') }}">Ok !<span class="fa arrow"></span></a>
                             <ul class="nav nav" id="entitiesNav1"></ul>
                         </li>
-
                     </ul>
                 </div>
-
-
                 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
                 <script type="text/javascript">
@@ -127,6 +125,23 @@
                                                         <div class="grid-price mt-2">
                                                             <span class="test ">Description {{ asso.description }}</span>
                                                         </div>
+                                                        <ul class="stars">
+                                                            <li>Rating :</li>
+                                                            {% if rates[i-1] == 0 %}
+                                                                aucun vote encore !
+                                                            {% endif %}
+
+                                                            {% if rates[i-1] != 0 %}
+                                                                {% for j in 1..rates[i-1]  %}
+                                                                    <li>
+                                                                        <a href="#">
+                                                                            <i class="fas fa-star"></i>
+                                                                        </a>
+                                                                    </li>
+                                                                {% endfor %}
+                                                            {% endif %}
+
+                                                        </ul>
                                                     </div>
                                                 </div>
                                             </div>
@@ -145,13 +160,77 @@
 
             </div>
         </div>
+        <div class="navigation">
+            {{ knp_pagination_render(assos) }}
         </div>
         </div>
         </div>
         </div>
         </div>
+        </div>
+
+
     </section>
-    {{ knp_pagination_render(assos,'@User/Paginator/pagination.html.twig') }}
+
+    {#{{ knp_pagination_render(assos,'@User/Paginator/pagination.html.twig') }}
+#}
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            var searchRequest = null;
+            $("#search").keyup(function() {
+                var minlength = 1;
+                var that = this;
+                var value = $(this).val();
+                var entitySelector = $("#entitiesNav").html('');
+                if (value.length >= minlength ) {
+                    if (searchRequest != null)
+                        searchRequest.abort();
+                    searchRequest = $.ajax({
+                        type: "GET",
+                        url: "{{ path('ajax_search') }}",
+                        data: {
+                            'q' : value
+                        },
+                        dataType: "text",
+                        success: function(msg){
+                            //we need to check if the value is the same
+                            if (value===$(that).val()) {
+                                var result = JSON.parse(msg);
+                                $.each(result, function(key, arr) {
+                                    $.each(arr, function(id, value) {
+                                        if (key === 'posts') {
+                                            if (id !== 'error') {
+                                                console.log(value[1]);
+                                                entitySelector.append('<div class="col-lg-4 col-md-6 col-sm-6 product-men women_two">'+
+                                                    '<div class="product-toys-info"><div class="men-pro-item"><div class="men-thumb-item">'+
+                                                    '<img src="/test1.1/web/images/'+value[0]+'" class="img-thumbnail img-fluid" alt=""/>'+
+                                                    '<div class="men-cart-pro"><div class="inner-men-cart-pro">'+
+                                                    '<a href="/test1.1/web/app_dev.php/user/evenementAccess/'+id+'" class="link-product-add-cart"'+'>Demande acces</a>'+
+                                                    ' </div></div><span class="product-new-top">join !</span></div><div class="item-info-product">'+
+                                                    '<div class="product_price"><div class="grid_meta"><div class="product_price"><h4><a href="single.html" class="product_price">'+
+                                                    value[1]+' </a></h4>'+
+                                                    '</div> </div><div class="toys single-item hvr-outline-out">'+
+                                                    '<form action="#" method="post"><input type="hidden" name="cmd" value="_cart">'+
+                                                    '<input type="hidden" name="add" value="1"><input type="hidden" name="toys_item" value="toys(barbie)">'+
+                                                    '<input type="hidden" name="amount" value="575.00"></form> </div></div><div class="clearfix"></div>'+
+                                                    '</div></div></div></div>'
+
+
+                                                );
+                                            } else {
+                                                entitySelector.append('<li class="errorLi">'+value+'</li>');
+                                            }
+                                        }
+                                    });
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+
 {% endblock %}
 {% block login %}
     <div>

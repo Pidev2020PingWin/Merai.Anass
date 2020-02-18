@@ -28,7 +28,7 @@ class Evenement
     /**
      * @var string
      *
-     * @ORM\Column(name="nom_association", type="string", length=50, nullable=false)
+     * @ORM\Column(name="nom_evenement", type="string", length=50, nullable=false)
      */
     private $nomEvent;
 

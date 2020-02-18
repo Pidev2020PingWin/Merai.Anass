@@ -16,6 +16,7 @@
 
 {% endblock %}
 {% block body %}
+    <link rel="stylesheet" href="{{ asset('datePicker.css') }}" type="text/css">
     {{ form_start(form) }}
     <div class="container py-lg-5 py-md-4 py-sm-4 py-3">
         <h3 class="title text-center mb-lg-5 mb-md-4 mb-sm-4 mb-3">Creér un evénement !</h3>
@@ -23,48 +24,65 @@
             <form action="#" method="post">
                 <div class=" agile-wls-contact-mid">
                     <div class="form-group contact-forms">
-                        {{ form_widget(form.nomEvent,{'attr':{'class':'form-control','placeholder':"Saisir le nom de l'evenement" }}) }}
-                        {{ form_errors(form.nomEvent) }}
+                        <label class="control-label">Nom de l'événement </label>
+
+                        <input id="username" name="nom_evenement" type="text" pattern="[a-zA-Z]{5,}" title="Minimum 5 letters" required />
+
                     </div>
                     <div class="form-group contact-forms">
+                        {{ form_label(form.file) }}
                         {{ form_widget(form.file) }}
                         {{ form_errors(form.file) }}
                     </div>
 
                     <div class="form-group contact-forms">
+                        {{ form_label(form.adresse) }}
                         {{ form_widget(form.adresse,{'attr':{'class':'form-control','placeholder':"Saisir l'adresse" }}) }}
                         {{ form_errors(form.adresse) }}
                     </div>
 
                     <div class="form-group contact-forms">
+                        {{ form_label(form.description) }}
                         {{ form_widget(form.description,{'attr':{'class':'form-control','placeholder':"Saisir la description" }}) }}
                         {{ form_errors(form.description) }}
                     </div>
                     <div class="form-group contact-forms">
-                        {{ form_widget(form.date) }}
-                        {{ form_errors(form.date) }}
+
+
+                        <label class="control-label">Date de l'événement </label>
+
+                        <input type="date" class="form-control" rows="3"  name="date" id="dat">
+
+
+
                     </div>
                     <div class="form-group contact-forms">
+                        {{ form_label(form.heure) }}
                         {{ form_widget(form.heure) }}
                         {{ form_errors(form.heure) }}
                     </div>
 
 
-<button type="submit" id="bt" class="btn btn-block sent-butnn" onclick="if(document.getElementById('cpt').value<0){alert('hello no negatives');return false;}" >Ajouter</button>
+{# <button type="submit" id="bt" class="btn btn-block sent-butnn" onclick="if(document.getElementById('cpt').value<0){alert('hello no negatives');return false;}" >Ajouter</button>#}
 
+                    <button type="submit" class="btn btn-block sent-butnn" name="_submit" id="_submit" onclick="var GivenDate = document.getElementById('dat').value;
+                                                                                var CurrentDate = new Date();
+                                                                                GivenDate = new Date(GivenDate);
+                                                                                if( GivenDate <= CurrentDate){
+                                                                                    alert('invalide!donner une date supérieure à la date courrante ');
+                                                                                    return false;
+                                                                                    }">Ajouter</button>
 </div>
 </form>
 {{ form_end(form) }}
 </div>
 
 </div>
-<script> function check() {
-//        var cpt = document.getElementById("cpt").value ;
-//        if(cpt < 0 ){
-//             return false;
 
-return false;
-}</script>
+{% endblock %}
+{% block js %}
+<script src="{{ asset('notif/lobibox.js') }}"></script>
+<script src="{{ asset('datePicker.js') }}"></script>
 {% endblock %}
 
 {% block login %}

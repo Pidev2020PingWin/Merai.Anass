@@ -1,0 +1,53 @@
+{% extends "@Admin/Default/back.html.twig" %}
+
+{% block body %}
+
+
+    <div class="bs-example widget-shadow" data-example-id="contextual-table">
+        <h3> Les Ratings :</h3>
+        <table class="table">
+            <thead>
+            <tr >
+                <th>Note </th>
+                <th>Description</th>
+                <th>Evenement</th>
+                <th>Membre</th>
+
+
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for d in demande  %}
+
+
+                    {% if d.value < 2 %}
+                        <tr class="danger">
+
+                    {% elseif d.value >=2  %}
+                        <tr class="success">
+                        {% else %}
+                        <tr class="info">
+                    {% endif %}
+
+
+                        <th >{{ d.value }}/5</th>
+                        <th >{{ d.description }}</th>
+                        <th >{{ d.ide.nomEvent }}</th>
+                        <th>{{ d.idu.username }}</th>
+
+
+                          </tr>
+
+            {% endfor %}
+            <tr>
+
+            </tbody>
+        </table>
+
+    </div>
+
+
+
+
+{% endblock %}

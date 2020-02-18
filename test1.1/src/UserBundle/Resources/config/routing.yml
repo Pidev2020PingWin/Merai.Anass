@@ -22,3 +22,9 @@ evenement_access:
 evenement_about:
     path:     /about/{id}
     defaults: { _controller: UserBundle:Evenement:aboutEvenement }
+ajax_search:
+    path:     /search
+    defaults: { _controller: UserBundle:Evenement:search }
+delete_notif:
+    path:     /dnotif/{id}
+    defaults: { _controller: UserBundle:Notification:delete }

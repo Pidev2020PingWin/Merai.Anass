@@ -62,7 +62,7 @@
                     </div>
                 {% endblock %}
                 {# Call NotificationsBundles's assets #}
-
+                {{ notifications_assets() }}
                 <script
                         src="https://code.jquery.com/jquery-3.4.0.slim.min.js"
                         integrity="sha256-ZaXnYkHGqIhqTbJ6MB4l9Frs/r7U4jlx7ir8PJYBqbI="
@@ -72,7 +72,7 @@
                         console.log.data('dataddd',data);
                         data.forEach(function (item) {
                             let li ='<li><a href="#">'+item.title+'</a></li>';
-                            $('#notifications').append(li);
+                            $('notifications').append(li);
                         });
                     }
                 </script>
@@ -95,22 +95,23 @@
                     });
 
                 </script>
+
                 <div class="col-lg-4 col-md-3 right-side-cart">
                     <div class="cart-icons">
                         <ul>
 
-
+                            {{ render(controller('UserBundle:Notification:display')) }}
 
                             <li>
                                 <button type="button" data-toggle="modal" data-target="#exampleModal"> <span class="far fa-user"></span></button>
                             </li>
                             <li class="toyscart toyscart2 cart cart box_1">
-                                <form  method="post" class="last">
+                               {#<form action="{{ path('panier') }}" method="post" class="last">#}
                                     <input type="hidden" name="cmd" value="_cart">
                                     <input type="hidden" name="display" value="1">
                                     <!-- //panier -->
-                                    <button class="top_toys_cart" type="submit" name="submit"  }}" >
-                                    <span class="fas fa-cart-arrow-down"  ></span>
+                                 {#<button class="top_toys_cart" type="submit" name="submit" value="" src="{{ path('panier') }}" >#}
+                                        <span class="fas fa-cart-arrow-down"  ></span>
                                     </button>
                                 </form>
                             </li>
